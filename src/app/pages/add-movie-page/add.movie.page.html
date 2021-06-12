@@ -1,0 +1,50 @@
+<app-navbar [pageName]="'Movie Details'"></app-navbar>
+<ion-content>
+    <div>
+      <form>
+        <ion-item>
+          <ion-label>Title</ion-label>
+          <ion-input type="text" [(ngModel)]="movie.title" name="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Description</ion-label>
+          <ion-input type="text" [(ngModel)]="movie.description" name="description"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Director</ion-label>
+          <ion-input type="text" [(ngModel)]="movie.director" name="director"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Genre</ion-label>
+          <ion-select interface="popover"
+                      [(ngModel)]="movie.genre"
+                      name="genre">
+            <ion-select-option *ngFor="let option of GENRES"
+                               [value]="option">
+              {{option}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Release Year</ion-label>
+          <ion-input type="number" [(ngModel)]="movie.releaseYear" name="releaseYear"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Duration Minutes</ion-label>
+          <ion-input type="number" [(ngModel)]="movie.durationMinutes" name="durationMinutes"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Rating</ion-label>
+          <ion-input type="number" [(ngModel)]="movie.rating" name="rating"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Watched</ion-label>
+          <ion-checkbox [(ngModel)]="movie.watched" name="watched"></ion-checkbox>
+        </ion-item>
+      </form>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-button expand="block" (click)="saveMovie()">Save</ion-button>
+    <ion-button expand="block" color="secondary" (click)="goToList()">Back to movies</ion-button>
+</ion-footer>

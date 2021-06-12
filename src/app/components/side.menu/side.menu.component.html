@@ -1,0 +1,23 @@
+<ion-menu slot="start" menuId="main" contentId="content1">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>My app</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item [routerLink]="'/movies'">Movies</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item *ngIf="isAuthenticated | async" [routerLink]="'/favourites'">Favourites</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item *ngIf="!(isAuthenticated | async)" [routerLink]="'/login'">Log in</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item *ngIf="isAuthenticated | async" (click)="logOut()">Log out</ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+</ion-menu>
