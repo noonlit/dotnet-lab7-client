@@ -65,8 +65,8 @@ export class FavouritesPage {
   }
 
   private loadFavourites() {
-    this.apiSvc.get('api/Favourites').subscribe((response: Array<Favourites>) => {
-      this.favourites = response;
+    this.apiSvc.get('api/Favourites').subscribe((response) => {
+      this.favourites = response.entities;
     });
   }
 }

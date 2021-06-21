@@ -58,8 +58,9 @@ export class EditFavouritesPage {
   }
 
   private loadMovies() {
-      this.apiSvc.get('api/Movies').subscribe((response: Array<Movie>) => {
-        this.moviesToAdd = response.filter(m => this.favourites.movieIds.indexOf(m.id) == -1);
+    this.apiSvc.get('api/Movies').subscribe((response) => {
+        let movies = response.entities;
+        this.moviesToAdd = movies.filter(m => this.favourites.movieIds.indexOf(m.id) == -1);
     });
   }
 

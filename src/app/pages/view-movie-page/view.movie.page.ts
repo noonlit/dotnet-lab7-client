@@ -88,7 +88,7 @@ export class ViewMoviePage {
 
   private loadComments(movieId: number) {
     this.apiSvc.get('api/Movies/' + movieId + '/comments').subscribe(response => {
-      this.comments = response.comments;
+      this.comments = response.entities;
       this.cd.detectChanges();
     });
   }
