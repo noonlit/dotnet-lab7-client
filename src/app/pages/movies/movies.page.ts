@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { ApiService } from './../../services/api.service';
-import { Movie } from './../../models/movie.model';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Movie, PaginatedMovies } from './../../models/movie.model';
+import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
@@ -13,14 +13,15 @@ import { Observable } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class MoviesPage {
-  movies: Array<Movie>;
+  movies: PaginatedMovies;
+  currentPage: number;
   isAuthenticated: Observable<boolean>;
 
-  constructor(private apiSvc: ApiService, private router: Router, private dataSvc: DataService, private authSvc: AuthService) { }
+  constructor(private cd: ChangeDetectorRef, private apiSvc: ApiService, private router: Router, private dataSvc: DataService, private authSvc: AuthService) { }
   ionViewWillEnter() {
     this.dataSvc.movie = null;
     this.isAuthenticated = this.authSvc.isAuthenticated();
-    this.loadMovies();
+    this.getMovies();
   }
 
   goToAddMovie() {
@@ -39,13 +40,15 @@ export class MoviesPage {
 
   deleteMovie(movie: Movie) {
     this.apiSvc.delete(`api/Movies/${movie.id}`).subscribe(() => {
-      this.loadMovies();
+      this.getMovies();
     });
   }
 
-  private loadMovies() {
-    this.apiSvc.get('api/Movies').subscribe((response: Array<Movie>) => {
+  private getMovies(page: number = 1) {
+    this.apiSvc.get('api/Movies', {'page': page}).subscribe((response: PaginatedMovies) => {
+      this.currentPage = page;
       this.movies = response;
+      this.cd.detectChanges();
     });
   }
 }

@@ -18,3 +18,12 @@ export enum Genre {
 }
 
 export const GENRES = ['Action', 'Comedy', 'Horror', 'Thriller'];
+
+export class PaginatedMovies {
+  firstPages: number[];
+  lastPages: number[];
+  previousPages: number[];
+  nextPages: number[];
+  totalEntities: number;
+  entities: Movie[];
+}
