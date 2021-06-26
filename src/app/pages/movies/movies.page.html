@@ -3,7 +3,7 @@
     <ion-list *ngIf="movies">
         <ion-item *ngFor="let movie of movies.entities; let i = index">
             <ion-label>
-                {{i + 1}}
+                {{movie.id}}
             </ion-label>
             <ion-label>{{movie.title}}</ion-label>
 
